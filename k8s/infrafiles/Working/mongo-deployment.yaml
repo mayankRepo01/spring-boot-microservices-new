@@ -1,0 +1,83 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mongo
+  name: mongo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mongo
+    spec:
+      containers:
+        - image: mongo:4.4.14-rc0-focal
+          name: mongo
+          ports:
+            - containerPort: 27017
+          resources: {}
+          volumeMounts:
+            - mountPath: /data/db
+              name: mongo-claim0
+      restartPolicy: Always
+      volumes:
+        - name: mongo-claim0
+          persistentVolumeClaim:
+            claimName: mongo-claim0
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: mongo
+  name: mongo
+spec:
+  ports:
+    - name: "27017"
+      port: 27017
+      targetPort: 27017
+  selector:
+    app: mongo
+status:
+  loadBalancer: {}
+---
+apiVersion: v1
+kind: PersistentVolume # Create a PV
+metadata:
+  name: mongo-data # Sets PV's name
+  labels:
+    type: mongo # Sets PV's type to local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 500Mi # Sets PV Volume
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/home/cloud_user/data/mongo/" # Sets the volume's path
+---
+apiVersion: v1
+kind: PersistentVolumeClaim # Create PVC
+metadata:
+  creationTimestamp: null
+  labels:
+    type: mongo # Sets PV's type to local
+  name: mongo-claim0
+spec:
+  storageClassName: manual
+  selector:
+    matchLabels:
+      type: mongo #this will boind the pv with same label  
+  accessModes:
+    - ReadWriteOnce # Sets read and write access
+  resources:
+    requests:
+      storage: 100Mi # Sets volume size
+
