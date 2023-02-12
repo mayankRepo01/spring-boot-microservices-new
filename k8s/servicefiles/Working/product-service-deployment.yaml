@@ -22,7 +22,7 @@ spec:
               value: docker
             - name: eureka.client.serviceUrl.defaultZone
               value: http://eureka:password@discovery-server-service:8761/eureka              
-          image: saiupadhyayula007/product-service:latest
+          image: hmishra609/product-service:latest
           name: product-service
           resources: {}
       restartPolicy: Always
