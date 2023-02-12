@@ -28,7 +28,7 @@ spec:
               value: root
             - name: spring.datasource.password
               value: root              
-          image: saiupadhyayula007/inventory-service:latest
+          image: hmishra609/inventory-service:latest
           name: inventory-service
           resources: {}
       restartPolicy: Always
