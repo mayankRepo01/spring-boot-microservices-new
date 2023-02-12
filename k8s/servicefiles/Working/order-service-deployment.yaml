@@ -28,7 +28,7 @@ spec:
               value: root
             - name: spring.datasource.password
               value: root                                     
-          image: saiupadhyayula007/order-service:latest
+          image: hmishra609/order-service:latest
           name: order-service
           resources: {}
       restartPolicy: Always
