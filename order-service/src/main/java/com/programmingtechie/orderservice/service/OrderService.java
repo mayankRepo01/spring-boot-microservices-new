@@ -18,6 +18,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -36,13 +37,13 @@ public class OrderService {
         List<OrderLineItems> orderLineItems = orderRequest.getOrderLineItemsDtoList()
                 .stream()
                 .map(this::mapToDto)
-                .toList();
+                .collect(Collectors. toList());
 
         order.setOrderLineItemsList(orderLineItems);
 
         List<String> skuCodes = order.getOrderLineItemsList().stream()
                 .map(OrderLineItems::getSkuCode)
-                .toList();
+                .collect(Collectors. toList());
 
         Span inventoryServiceLookup = tracer.nextSpan().name("InventoryServiceLookup");
 
@@ -52,7 +53,7 @@ public class OrderService {
             // Call Inventory Service, and place order if product is in
             // stock
             InventoryResponse[] inventoryResponsArray = webClientBuilder.build().get()
-                    .uri("http://inventory-service/api/inventory",
+                    .uri("http://inventory-service:8080/api/inventory",
                             uriBuilder -> uriBuilder.queryParam("skuCode", skuCodes).build())
                     .retrieve()
                     .bodyToMono(InventoryResponse[].class)

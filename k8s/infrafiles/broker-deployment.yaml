@@ -51,10 +51,12 @@ metadata:
     app: broker
   name: broker
 spec:
+  type: NodePort
   ports:
-    - name: "9092"
+    - protocol: TCP
       port: 9092
       targetPort: 9092
+      nodePort: 30095
   selector:
     app: broker
 status:

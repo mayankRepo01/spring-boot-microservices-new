@@ -41,10 +41,12 @@ metadata:
     app: inventory-service
   name: inventory-service
 spec:
+  type: NodePort
   ports:
     - name: "80"
-      port: 80
-      targetPort: 9191
+      port: 8080
+      targetPort: 8080
+      nodePort : 30070
   selector:
     app: inventory-service
 status:

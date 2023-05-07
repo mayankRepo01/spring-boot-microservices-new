@@ -35,10 +35,12 @@ metadata:
     app: product-service
   name: product-service
 spec:
+  type: NodePort
   ports:
     - name: "80"
-      port: 80
-      targetPort: 9194
+      port: 8080
+      targetPort: 8080
+      nodePort : 30096
   selector:
     app: product-service
 status:

@@ -32,10 +32,12 @@ metadata:
     app: zipkin
   name: zipkin
 spec:
+  type: NodePort
   ports:
-    - name: "9411"
+    - protocol: TCP
       port: 9411
       targetPort: 9411
+      nodePort: 30088
   selector:
     app: zipkin
 status:
