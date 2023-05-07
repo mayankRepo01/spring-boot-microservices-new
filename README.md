@@ -9,6 +9,6 @@ It contains working deployment files
 #Below command can be used to build the image and push it
 
 
-# mvn compile jib:build -D'jib.to.auth.username'=<username> -D'jib.to.auth.password'=<password>
+mvn compile jib:build -D'jib.to.auth.username'=<username> -D'jib.to.auth.password'=<password>
 
 
