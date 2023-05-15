@@ -35,9 +35,9 @@ spec:
             - name: KC_DB_VENDOR
               value: MYSQL              
             - name: KEYCLOAK_ADMIN
-              value: admin
+              value: root
             - name: KEYCLOAK_ADMIN_PASSWORD
-              value: admin
+              value: root
           image: quay.io/keycloak/keycloak:21.1.1
           name: keycloak
           ports:

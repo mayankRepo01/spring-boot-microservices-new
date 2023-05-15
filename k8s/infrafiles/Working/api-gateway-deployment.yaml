@@ -24,7 +24,7 @@ spec:
             - name: spring.security.oauth2.resourceserver.jwt.issuer-uri
               value: http://keycloak-service:8080/realms/spring_boot
             - name: eureka.client.serviceUrl.defaultZone
-              value: http://eureka:password@discovery-server-service:8761/eureka/web/              
+              value: http://root:root@discovery-server-service:8761/eureka/web/              
           image: hmishra609/api-gateway:latest
           name: api-gateway
           ports:
