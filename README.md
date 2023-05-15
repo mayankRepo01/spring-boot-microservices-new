@@ -14,4 +14,4 @@ mvn compile jib:build -D'jib.to.auth.username'=<username> -D'jib.to.auth.passwor
 username should be username not whole email, if it still gives error delete creds from config.json of .docker folder
 
 
-Order to Inventory call is still not working and files outside working folder
+Order to Inventory call is still not working
